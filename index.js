@@ -39,7 +39,7 @@ function init() {
                 message: "Please enter the team manager's office number",
             },
             {
-                type:'list',
+                type: 'list',
                 name: 'addMember',
                 message: 'What would you like to do next?',
                 choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
@@ -98,11 +98,21 @@ function init() {
             // either an inquirer 'when' or an if statement
         ])
 
-        .then((answers) => {
-            fs.writeFile('team.html', answers, (err) =>
-            err ? console.error(err) : console.log('Success!')
-        );
-        })
+            // Call the render function and pass in an array containing all employee objects;
+            // The render function will generate and return a block of HTML including templated divs for each employee!
+
+            // TODO: ASk Benicio how to pass in array, forEach???
+
+            .then((answers) => {
+                render(answers)
+            })
+
+
+        // Create an HTML file using the HTML returned from the render function.
+        // Write it to a file named team.html in the output folder.
+        // You can use the provided variable outputPath to target this location.
+        // TODO: Ask Benicio, do I call this from within the class?
+        // TODO: How does OUTPIUT_DIR work??
     ]
 
 }
