@@ -6,6 +6,8 @@
 # Node modules
 node_modules
 
+team-profile-generator\node_modules
+
 # User-specific files
 *.rsuser
 *.suo
