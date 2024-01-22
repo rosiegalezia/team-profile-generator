@@ -25,7 +25,7 @@ A Node.js command-line application created for Week 12 of the 16-Week Front-End 
 
 ## Usage
 
-A screenshot of the final site can be seen below.
+An example Team Profile page is available [here](https://rosiegalezia.github.io/team-profile-example/). A screenshot of the final site can be seen below.
 ![Screenshot of 'Team' page](./assets/Screenshot.png)
 
 ## Credits
