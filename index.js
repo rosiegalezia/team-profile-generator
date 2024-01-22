@@ -104,7 +104,12 @@ function init() {
             // TODO: ASk Benicio how to pass in array, forEach???
 
             .then((answers) => {
-                render(answers)
+                
+                const renderHTML = render(answers)
+
+                fs.writeFile('team.html', renderHTML, (err) =>
+                err ? console.error(err) : console.log('Success!')
+            );
             })
 
 

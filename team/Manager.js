@@ -1,3 +1,5 @@
+const Employee = require("./Employee")
+
 class Manager extends Employee {
     // In addition to Employee's properties and methods, Manager will also have officeNumber
 
