@@ -91,7 +91,7 @@ function init() {
     function addMember() {
 
         // ask user if they want to add another employee or finish
-        inquirer.promt({
+        inquirer.prompt({
             type: 'list',
             name: 'addMember',
             message: 'What would you like to do next?',
@@ -124,10 +124,12 @@ function init() {
                     answers.officeNumber,
                 )
                 team.push(manager)
+
+                // see if user wants to add another employee or finish
+                addMember()
             })
 
-        // see if user wants to add another employee or finish
-        addMember()
+
     }
 
     function intern() {
@@ -147,10 +149,12 @@ function init() {
 
                 // push the newly created subclass to the 'team' array
                 team.push(intern)
+
+                // see if user wants to add another employee or finish
+                addMember()
             })
 
-        // see if user wants to add another employee or finish
-        addMember()
+
     }
 
     function engineer() {
@@ -170,10 +174,12 @@ function init() {
 
                 // push the newly created subclass to the 'team' array
                 team.push(engineer)
+
+                // see if user wants to add another employee or finish
+                addMember()
             })
 
-        // see if user wants to add another employee or finish
-        addMember()
+
     }
 
     // call the manager function to trigger the first series of questions.
