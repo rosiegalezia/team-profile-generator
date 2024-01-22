@@ -45,25 +45,6 @@ function init() {
         },
     ]
 
-    // // Define the questions asked if answers.addMember is equal to 'Add an engineer' or 'Add an intern'
-    // const employeeQuestionsArr = [
-    //     {
-    //         type: 'input',
-    //         name: 'employeeName',
-    //         message: "Please enter the employee's name",
-    //     },
-    //     {
-    //         type: 'number',
-    //         name: 'employeeID',
-    //         message: "Please enter the employee's ID number",
-    //     },
-    //     {
-    //         type: 'input',
-    //         name: 'employeeEmail',
-    //         message: "Please enter the employee's email address",
-    //     },
-    // ]
-
     // Define the questions asked if answers.addMember is equal to 'Add an engineer'
     const engineerQuestionsArr = [
         {

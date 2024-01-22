@@ -1,0 +1,61 @@
+
+:root {
+--primary: #175676;
+--secondary: #4BA3C3;
+--background: #CCE6F4;
+--text: #12394d;
+--accent: #BA324F;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+    box-shadow: rgba(186, 50, 79, 0.4) 5px 5px, rgba(186, 50, 79, 0.3) 10px 10px, rgba(186, 50, 79, 0.2) 15px 15px, rgba(186, 50, 79, 0.1) 20px 20px, rgba(186, 50, 79, 0.05) 25px 25px;
+}
+
+.card-header {
+background-color: white;
+border: none;
+border-radius: 10px !important;
+padding: 25px;
+}
+
+.card-body {
+
+}
+
+.col {
+    padding: 0;
+    margin: 15px;
+}
+
+h1 {
+    color: white;
+}
+
+h2, h4, h5, h6 {
+    color: var(--text)
+}
+
+h3 {
+    color: var(--accent);
+}
+
+.team-heading {
+    background-color: var(--secondary);
+}
+
+.list-group-item {
+    border: none;
+    background-color: white;
+    padding: 5px;
+}
+
+body {
+    background-color: var(--background);
+}
+
+.container {
+    padding-top: 20px;
+}
