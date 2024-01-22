@@ -8,7 +8,9 @@ class Employee {
 
         // TODO: Ask Benicio, do I need to define the methods in here?
         // TODO: if so, how as the inquirer name specifies the role (or should I split the inquirer questions up?)
-    getName(){}
+    getName(){
+    }
+
     getId(){}
     getEmail(){}
     getRole(){

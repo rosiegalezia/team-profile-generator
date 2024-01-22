@@ -22,22 +22,22 @@ function init() {
     const managerQuestionsArr = [
         {
             type: 'input',
-            name: 'managerName',
+            name: 'name',
             message: "Please enter the team manager's name",
         },
         {
             type: 'number',
-            name: 'managerID',
+            name: 'ID',
             message: "Please enter the team manager's ID number",
         },
         {
             type: 'input',
-            name: 'managerEmail',
+            name: 'email',
             message: "Please enter the team manager's email address",
         },
         {
             type: 'number',
-            name: 'managerOffice',
+            name: 'officeNumber',
             message: "Please enter the team manager's office number",
         },
         {
@@ -48,32 +48,46 @@ function init() {
         },
     ]
 
-    // Define the questions asked if answers.addMember is equal to 'Add an engineer' or 'Add an intern'
-    const employeeQuestionsArr = [
-        {
-            type: 'input',
-            name: 'employeeName',
-            message: "Please enter the employee's name",
-        },
-        {
-            type: 'number',
-            name: 'employeeID',
-            message: "Please enter the employee's ID number",
-        },
-        {
-            type: 'input',
-            name: 'employeeEmail',
-            message: "Please enter the employee's email address",
-        },
-    ]
+    // // Define the questions asked if answers.addMember is equal to 'Add an engineer' or 'Add an intern'
+    // const employeeQuestionsArr = [
+    //     {
+    //         type: 'input',
+    //         name: 'employeeName',
+    //         message: "Please enter the employee's name",
+    //     },
+    //     {
+    //         type: 'number',
+    //         name: 'employeeID',
+    //         message: "Please enter the employee's ID number",
+    //     },
+    //     {
+    //         type: 'input',
+    //         name: 'employeeEmail',
+    //         message: "Please enter the employee's email address",
+    //     },
+    // ]
 
     // Define the questions asked if answers.addMember is equal to 'Add an engineer'
     const engineerQuestionsArr = [
         {
             type: 'input',
-            name: 'engineerGithub',
+            name: 'name',
+            message: "Please enter the engineer's name",
+        },
+        {
+            type: 'number',
+            name: 'ID',
+            message: "Please enter the engineer's ID number",
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "Please enter the engineer's email address",
+        },
+        {
+            type: 'input',
+            name: 'github',
             message: "Please enter the engineer's GitHub username",
-            when: (answers) => answers['addMember'] === 'Add an engineer',
         },
         {
             type: 'list',
@@ -87,7 +101,22 @@ function init() {
     const internQuestionsArr = [
         {
             type: 'input',
-            name: 'internSchool',
+            name: 'name',
+            message: "Please enter the intern's name",
+        },
+        {
+            type: 'number',
+            name: 'ID',
+            message: "Please enter the intern's ID number",
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "Please enter the intern's email address",
+        },
+        {
+            type: 'input',
+            name: 'school',
             message: "Please enter the intern's school",
             when: (answers) => answers['addMember'] === 'Add an intern',
         },
@@ -124,23 +153,41 @@ function init() {
                     answers.managerOffice,
                 )
                 team.push(manager)
+
+                if (answers.addMember === 'Add an intern'){
+                    intern()
+                } 
+                // else if
+                // (answers.addMember === 'Add an engineer'){
+                //     engineer()
+                // }
+
             })
     }
 
     function intern(){
-        inquirer.prompt(employeeQuestionsArr)
-        .then((answers) => {
-            const employee = new Employee(
-                answers.employeeName,
-                answers.employeeID,
-                answers.employeeEmail,
-            )
-            team.push(employee)
-        })
-        
         inquirer.prompt(internQuestionsArr)
         .then((answers) => {
-            
+            const intern = new Intern(
+                answers.name,
+                answers.ID,
+                answers.email,
+                answers.school,
+            )
+            team.push(intern)
+        })
+    }
+
+    function engineer(){
+        inquirer.prompt(engineerQuestionsArr)
+        .then((answers) => {
+            const engineer = new Engineer(
+                answers.name,
+                answers.ID,
+                answers.email,
+                answers.github,
+            )
+            team.push(engineer)
         })
     }
 
@@ -165,7 +212,7 @@ function init() {
     //         })
     // }
 
-    managerQuestions()
+    manager()
 
 }
 
