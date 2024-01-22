@@ -110,8 +110,12 @@ function init() {
     // You can use the provided variable outputPath to target this location.
 
     function manager() {
+        // pass the initial questions to the inquirer to get user inputs
+
         inquirer.prompt(managerQuestionsArr)
+        
             .then((answers) => {
+
                 const manager = new Manager(
                     answers.name,
                     answers.ID,
@@ -134,63 +138,77 @@ function init() {
     }
 
     function intern() {
+
+        // pass the intern-specific questions to the inquirer to get user inputs
         inquirer.prompt(internQuestionsArr)
+
             .then((answers) => {
+
+                // pass in the employee details obtained by Inquirer to the constructor function
                 const intern = new Intern(
                     answers.name,
                     answers.ID,
                     answers.email,
                     answers.school,
                 )
+
+                // push the newly created subclass to the 'team' array
                 team.push(intern)
 
                 if (answers.addMember === 'Add an intern') {
                     intern()
                 }
-                else if
-                    (answers.addMember === 'Add an engineer') {
+                else if (answers.addMember === 'Add an engineer') {
                     engineer()
-                } else {
+                }
+                else {
                     writeFile()
                 }
             })
     }
 
     function engineer() {
+
+        // pass the engineer-specific questions to the inquirer to get user inputs
         inquirer.prompt(engineerQuestionsArr)
+
             .then((answers) => {
+
+                // pass in the employee details obtained by Inquirer to the constructor function
                 const engineer = new Engineer(
                     answers.name,
                     answers.ID,
                     answers.email,
                     answers.github,
                 )
+
+                // push the newly created subclass to the 'team' array
                 team.push(engineer)
 
                 if (answers.addMember === 'Add an intern') {
                     intern()
                 }
-                else if
-                    (answers.addMember === 'Add an engineer') {
+                else if (answers.addMember === 'Add an engineer') {
                     engineer()
-                } else {
+                }
+                else {
                     writeFile()
                 }
             })
     }
 
+    // call the manager function to trigger the first series of questions.
     manager()
 
 }
 
+// function to create the HTML page
 function writeFile() {
-    
-    // Call the render function and pass in an array containing all employee objects;
-    // The render function will generate and return a block of HTML including templated divs for each employee!
 
-    console.log(team)
+    // calls the render function, passing in the 'team' array
+    // this will generate and return a block of HTML including templated divs for each employee
     const renderTeam = render(team)
-    
+
     fs.writeFile(outputPath, renderTeam, (err) =>
         err ? console.error(err) : console.log('Team page created!')
     );
