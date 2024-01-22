@@ -128,15 +128,6 @@ function init() {
         },
     ]
 
-    // work out what to do if 'finish team' is selected
-    // either an inquirer 'when' or an if statement
-
-
-    // Call the render function and pass in an array containing all employee objects;
-    // The render function will generate and return a block of HTML including templated divs for each employee!
-
-    // TODO: Ask Benicio how to pass in array, forEach??
-
     // Create an HTML file using the HTML returned from the render function.
     // Write it to a file named team.html in the output folder.
     // You can use the provided variable outputPath to target this location.
@@ -154,68 +145,83 @@ function init() {
                 )
                 team.push(manager)
 
-                if (answers.addMember === 'Add an intern'){
+                if (answers.addMember === 'Add an intern') {
                     intern()
-                } 
-                // else if
-                // (answers.addMember === 'Add an engineer'){
-                //     engineer()
-                // }
+                }
+                else if
+                    (answers.addMember === 'Add an engineer') {
+                    engineer()
+                } else {
+                    writeFile()
+                }
 
             })
     }
 
-    function intern(){
+    function intern() {
         inquirer.prompt(internQuestionsArr)
-        .then((answers) => {
-            const intern = new Intern(
-                answers.name,
-                answers.ID,
-                answers.email,
-                answers.school,
-            )
-            team.push(intern)
-        })
+            .then((answers) => {
+                const intern = new Intern(
+                    answers.name,
+                    answers.ID,
+                    answers.email,
+                    answers.school,
+                )
+                team.push(intern)
+
+                if (answers.addMember === 'Add an intern') {
+                    intern()
+                }
+                else if
+                    (answers.addMember === 'Add an engineer') {
+                    engineer()
+                } else {
+                    writeFile()
+                }
+            })
     }
 
-    function engineer(){
+    function engineer() {
         inquirer.prompt(engineerQuestionsArr)
-        .then((answers) => {
-            const engineer = new Engineer(
-                answers.name,
-                answers.ID,
-                answers.email,
-                answers.github,
-            )
-            team.push(engineer)
-        })
+            .then((answers) => {
+                const engineer = new Engineer(
+                    answers.name,
+                    answers.ID,
+                    answers.email,
+                    answers.github,
+                )
+                team.push(engineer)
+
+                if (answers.addMember === 'Add an intern') {
+                    intern()
+                }
+                else if
+                    (answers.addMember === 'Add an engineer') {
+                    engineer()
+                } else {
+                    writeFile()
+                }
+            })
     }
-
-    // function managerQuestions() {
-    //     inquirer.prompt(managerQuestionsArr)
-    //         .then((answers) => {
-
-    //             const renderTeam = render(answers)
-
-    //             if (answers.addMember === 'Add an engineer') {
-    //                 inquirer.prompt(employeeQuestionsArr)
-    //                 inquirer.prompt(engineerQuestionsArr)
-    //             } else
-    //                 if (answers.addMember === 'Add an intern') {
-    //                     inquirer.prompt(employeeQuestionsArr)
-    //                     inquirer.prompt(internQuestionsArr)
-    //                 } else {
-    //                     fs.writeFile('team.html', renderTeam, (err) =>
-    //                         err ? console.error(err) : console.log('Success!')
-    //                     );
-    //                 }
-    //         })
-    // }
 
     manager()
 
 }
 
+function writeFile() {
+    
+    // Call the render function and pass in an array containing all employee objects;
+    // The render function will generate and return a block of HTML including templated divs for each employee!
+
+
+    // TODO: ask how to put this within an 'output' folder??
+
+    const renderTeam = render(team)
+
+    fs.writeFile('team.html', renderTeam, (err) =>
+        err ? console.error(err) : console.log('Success!')
+    );
+}
 
 
 
