@@ -14,7 +14,7 @@ class Manager extends Employee {
 
     getRole() {
         // overridden to return 'Manager'
-        return 'Manager'
+        return ' Manager'
     }
 }
 
