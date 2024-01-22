@@ -17,85 +17,101 @@ const render = require("./src/page-template.js");
 function init() {
 
     // Define the default questions
-    const initialQuestionsArr = [
-        {
-            type: 'input',
-            name: 'managerName',
-            message: "Please enter the team manager's name",
-        },
-        {
-            type: 'number',
-            name: 'managerID',
-            message: "Please enter the team manager's ID number",
-        },
-        {
-            type: 'input',
-            name: 'managerEmail',
-            message: "Please enter the team manager's email address",
-        },
-        {
-            type: 'number',
-            name: 'managerOffice',
-            message: "Please enter the team manager's office number",
-        },
-        // {
-        //     type: 'list',
-        //     name: 'addMember',
-        //     message: 'What would you like to do next?',
-        //     choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
-        // },
-    ]
+    function initialQuestions() {
+        const initialQuestionsArr = [
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'managerName',
+                    message: "Please enter the team manager's name",
+                },
+                {
+                    type: 'number',
+                    name: 'managerID',
+                    message: "Please enter the team manager's ID number",
+                },
+                {
+                    type: 'input',
+                    name: 'managerEmail',
+                    message: "Please enter the team manager's email address",
+                },
+                {
+                    type: 'number',
+                    name: 'managerOffice',
+                    message: "Please enter the team manager's office number",
+                },
+                // {
+                //     type: 'list',
+                //     name: 'addMember',
+                //     message: 'What would you like to do next?',
+                //     choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
+                // },
+            ])
+        ]
+    }
 
     // Define the questions asked if answers.addMember is equal to 'Add an engineer' or 'Add an intern'
-    const employeeQuestionsArr = [
-        {
-            type: 'input',
-            name: 'employeeName',
-            message: "Please enter the employee's name",
-        },
-        {
-            type: 'number',
-            name: 'employeeID',
-            message: "Please enter the employee's ID number",
-        },
-        {
-            type: 'input',
-            name: 'employeeEmail',
-            message: "Please enter the employee's email address",
-        },
-    ]
+    function employeeQuestions() {
+        const employeeQuestionsArr = [
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'employeeName',
+                    message: "Please enter the employee's name",
+                },
+                {
+                    type: 'number',
+                    name: 'employeeID',
+                    message: "Please enter the employee's ID number",
+                },
+                {
+                    type: 'input',
+                    name: 'employeeEmail',
+                    message: "Please enter the employee's email address",
+                },
+            ])
+        ]
+    }
 
     // Define the questions asked if answers.addMember is equal to 'Add an engineer'
-    const engineerQuestionsArr = [
-        {
-            type: 'input',
-            name: 'engineerGithub',
-            message: "Please enter the engineer's GitHub username",
-            when: (answers) => answers['addMember'] === 'Add an engineer',
-        },
-        {
-            type: 'list',
-            name: 'addMember',
-            message: 'What would you like to do next?',
-            choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
-        },
-    ]
+    function engineerQuestions() {
+        const engineerQuestionsArr = [
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'engineerGithub',
+                    message: "Please enter the engineer's GitHub username",
+                    when: (answers) => answers['addMember'] === 'Add an engineer',
+                },
+                {
+                    type: 'list',
+                    name: 'addMember',
+                    message: 'What would you like to do next?',
+                    choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
+                },
+            ])
+        ]
+    }
 
     // Define the questions asked if answers.addMember is equal to 'Add an intern'
-    const internQuestionsArr = [
-        {
-            type: 'input',
-            name: 'internSchool',
-            message: "Please enter the intern's school",
-            when: (answers) => answers['addMember'] === 'Add an intern',
-        },
-        {
-            type: 'list',
-            name: 'addMember',
-            message: 'What would you like to do next?',
-            choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
-        },
-    ]
+    function internQuestions() {
+        const internQuestionsArr = [
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'internSchool',
+                    message: "Please enter the intern's school",
+                    when: (answers) => answers['addMember'] === 'Add an intern',
+                },
+                {
+                    type: 'list',
+                    name: 'addMember',
+                    message: 'What would you like to do next?',
+                    choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
+                },
+            ])
+        ]
+    }
 
     // work out what to do if 'finish team' is selected
     // either an inquirer 'when' or an if statement
@@ -113,19 +129,20 @@ function init() {
     // TODO: How does OUTPIUT_DIR work??
 
 
-    function initialQuestions() {
-        inquirer.prompt(initialQuestionsArr)
-            .then((answers) => {
+    function askQuestions() {
 
+        initialQuestions()
+        
+            .then((answers) => {
                 const renderTeam = render(answers)
 
                 if (answers.addMember === 'Add an engineer') {
-                    inquirer.prompt(employeeQuestionsArr)
-                    inquirer.prompt(engineerQuestionsArr)
+                    employeeQuestions()
+                    engineerQuestions()
                 } else
                     if (answers.addMember === 'Add an intern') {
-                        inquirer.prompt(employeeQuestionsArr)
-                        inquirer.prompt(internQuestionsArr)
+                        employeeQuestions()
+                        internQuestions()
                     } else {
                         fs.writeFile('team.html', renderTeam, (err) =>
                             err ? console.error(err) : console.log('Success!')
@@ -134,7 +151,7 @@ function init() {
             })
     }
 
-    initialQuestions()
+    askQuestions()
 
 }
 
