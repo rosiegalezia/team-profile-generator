@@ -13,9 +13,6 @@ const render = require("./src/page-template.js");
 
 const team = []
 
-
-// TODO: Write Code to gather information about the development team members, and render the HTML file.
-
 function init() {
 
     // Define the default questions
@@ -130,8 +127,6 @@ function init() {
     // Create an HTML file using the HTML returned from the render function.
     // Write it to a file named team.html in the output folder.
     // You can use the provided variable outputPath to target this location.
-    
-    // TODO: How does OUTPIUT_DIR work??
 
     function manager() {
         inquirer.prompt(managerQuestionsArr)
@@ -212,8 +207,6 @@ function writeFile() {
     // Call the render function and pass in an array containing all employee objects;
     // The render function will generate and return a block of HTML including templated divs for each employee!
 
-
-    // TODO: ask how to put this within an 'output' folder??
     console.log(team)
     const renderTeam = render(team)
     
@@ -221,9 +214,6 @@ function writeFile() {
         err ? console.error(err) : console.log('Team page created!')
     );
 }
-
-
-
 
 // call the function to initialise program
 init()
