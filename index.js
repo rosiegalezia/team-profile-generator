@@ -10,6 +10,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./src/page-template.js");
+const { add } = require("lodash");
 
 const team = []
 
@@ -37,12 +38,6 @@ function init() {
             name: 'officeNumber',
             message: "Please enter the team manager's office number",
         },
-        {
-            type: 'list',
-            name: 'addMember',
-            message: 'What would you like to do next?',
-            choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
-        },
     ]
 
     // Define the questions asked if answers.addMember is equal to 'Add an engineer'
@@ -66,12 +61,6 @@ function init() {
             type: 'input',
             name: 'github',
             message: "Please enter the engineer's GitHub username",
-        },
-        {
-            type: 'list',
-            name: 'addMember',
-            message: 'What would you like to do next?',
-            choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
         },
     ]
 
@@ -97,23 +86,35 @@ function init() {
             name: 'school',
             message: "Please enter the intern's school",
         },
-        {
+    ]
+
+    function addMember() {
+
+        // ask user if they want to add another employee or finish
+        inquirer.promt({
             type: 'list',
             name: 'addMember',
             message: 'What would you like to do next?',
             choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
-        },
-    ]
-
-    // Create an HTML file using the HTML returned from the render function.
-    // Write it to a file named team.html in the output folder.
-    // You can use the provided variable outputPath to target this location.
+        })
+            .then((answers) => {
+                if (answers.addMember === 'Add an intern') {
+                    intern()
+                }
+                else if (answers.addMember === 'Add an engineer') {
+                    engineer()
+                }
+                else {
+                    writeFile()
+                }
+            })
+    }
 
     function manager() {
         // pass the initial questions to the inquirer to get user inputs
 
         inquirer.prompt(managerQuestionsArr)
-        
+
             .then((answers) => {
 
                 const manager = new Manager(
@@ -123,18 +124,10 @@ function init() {
                     answers.officeNumber,
                 )
                 team.push(manager)
-
-                if (answers.addMember === 'Add an intern') {
-                    intern()
-                }
-                else if
-                    (answers.addMember === 'Add an engineer') {
-                    engineer()
-                } else {
-                    writeFile()
-                }
-
             })
+
+        // see if user wants to add another employee or finish
+        addMember()
     }
 
     function intern() {
@@ -154,17 +147,10 @@ function init() {
 
                 // push the newly created subclass to the 'team' array
                 team.push(intern)
-
-                if (answers.addMember === 'Add an intern') {
-                    intern()
-                }
-                else if (answers.addMember === 'Add an engineer') {
-                    engineer()
-                }
-                else {
-                    writeFile()
-                }
             })
+
+        // see if user wants to add another employee or finish
+        addMember()
     }
 
     function engineer() {
@@ -184,17 +170,10 @@ function init() {
 
                 // push the newly created subclass to the 'team' array
                 team.push(engineer)
-
-                if (answers.addMember === 'Add an intern') {
-                    intern()
-                }
-                else if (answers.addMember === 'Add an engineer') {
-                    engineer()
-                }
-                else {
-                    writeFile()
-                }
             })
+
+        // see if user wants to add another employee or finish
+        addMember()
     }
 
     // call the manager function to trigger the first series of questions.
