@@ -138,10 +138,10 @@ function init() {
         inquirer.prompt(managerQuestionsArr)
             .then((answers) => {
                 const manager = new Manager(
-                    answers.managerName,
-                    answers.managerID,
-                    answers.managerEmail,
-                    answers.managerOffice,
+                    answers.name,
+                    answers.ID,
+                    answers.email,
+                    answers.officeNumber,
                 )
                 team.push(manager)
 
@@ -215,9 +215,9 @@ function writeFile() {
 
 
     // TODO: ask how to put this within an 'output' folder??
-
+    console.log(team)
     const renderTeam = render(team)
-
+    
     fs.writeFile('team.html', renderTeam, (err) =>
         err ? console.error(err) : console.log('Success!')
     );

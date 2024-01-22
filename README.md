@@ -13,7 +13,15 @@ A Node.js command-line application created for Week 12 of the 16-Week Front-End 
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+* Open Git Bash
+
+* Change the current working directory to the desired location for the cloned directory using the cd command
+
+* Use the command 'git clone' followed by the url https://github.com/rosiegalezia/team-profile-generator.git and press enter to clone locally
+
+* Open the repository in VS Code and open it in the integrated terminal.
+
+* Type 'node index.js' in the terminal to run the command-line application.
 
 ## Usage
 
@@ -27,11 +35,7 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
+👏
 
 ## License
 
