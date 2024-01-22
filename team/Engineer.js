@@ -12,7 +12,7 @@ class Engineer extends Employee {
 
     getRole(){
         // overridden to return 'Engineer'
-        return ' Engineer'
+        return 'Engineer'
     }
 
 }

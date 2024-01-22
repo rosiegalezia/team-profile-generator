@@ -26,7 +26,7 @@ A Node.js command-line application created for Week 12 of the 16-Week Front-End 
 ## Usage
 
 A screenshot of the final site can be seen below.
-![Screenshot of 'Team' page](../team-profile-generator/assets/Screenshot.png)
+![Screenshot of 'Team' page](./assets/Screenshot.png)
 
 ## Credits
 
