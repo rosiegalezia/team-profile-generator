@@ -118,7 +118,6 @@ function init() {
             type: 'input',
             name: 'school',
             message: "Please enter the intern's school",
-            when: (answers) => answers['addMember'] === 'Add an intern',
         },
         {
             type: 'list',
@@ -131,7 +130,7 @@ function init() {
     // Create an HTML file using the HTML returned from the render function.
     // Write it to a file named team.html in the output folder.
     // You can use the provided variable outputPath to target this location.
-    // TODO: Ask Benicio, do I call this from within the class?
+    
     // TODO: How does OUTPIUT_DIR work??
 
     function manager() {
@@ -218,8 +217,8 @@ function writeFile() {
     console.log(team)
     const renderTeam = render(team)
     
-    fs.writeFile('team.html', renderTeam, (err) =>
-        err ? console.error(err) : console.log('Success!')
+    fs.writeFile(outputPath, renderTeam, (err) =>
+        err ? console.error(err) : console.log('Team page created!')
     );
 }
 
