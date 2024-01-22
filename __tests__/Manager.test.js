@@ -1,5 +1,5 @@
-const Manager = require("../team-profile-generator/starter/lib/Manager");
-const Employee = require("../team-profile-generator/starter/lib/Employee");
+const Manager = require("../team/Manager");
+const Employee = require("../team/Employee");
 
 test("Can set office number via constructor argument", () => {
   const testValue = 100;
