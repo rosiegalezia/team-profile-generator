@@ -11,107 +11,93 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./src/page-template.js");
 
+const team = []
+
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
 function init() {
 
     // Define the default questions
-    function initialQuestions() {
-        const initialQuestionsArr = [
-            inquirer.prompt([
-                {
-                    type: 'input',
-                    name: 'managerName',
-                    message: "Please enter the team manager's name",
-                },
-                {
-                    type: 'number',
-                    name: 'managerID',
-                    message: "Please enter the team manager's ID number",
-                },
-                {
-                    type: 'input',
-                    name: 'managerEmail',
-                    message: "Please enter the team manager's email address",
-                },
-                {
-                    type: 'number',
-                    name: 'managerOffice',
-                    message: "Please enter the team manager's office number",
-                },
-                // {
-                //     type: 'list',
-                //     name: 'addMember',
-                //     message: 'What would you like to do next?',
-                //     choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
-                // },
-            ])
-        ]
-    }
+    const managerQuestionsArr = [
+        {
+            type: 'input',
+            name: 'managerName',
+            message: "Please enter the team manager's name",
+        },
+        {
+            type: 'number',
+            name: 'managerID',
+            message: "Please enter the team manager's ID number",
+        },
+        {
+            type: 'input',
+            name: 'managerEmail',
+            message: "Please enter the team manager's email address",
+        },
+        {
+            type: 'number',
+            name: 'managerOffice',
+            message: "Please enter the team manager's office number",
+        },
+        // {
+        //     type: 'list',
+        //     name: 'addMember',
+        //     message: 'What would you like to do next?',
+        //     choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
+        // },
+    ]
 
     // Define the questions asked if answers.addMember is equal to 'Add an engineer' or 'Add an intern'
-    function employeeQuestions() {
-        const employeeQuestionsArr = [
-            inquirer.prompt([
-                {
-                    type: 'input',
-                    name: 'employeeName',
-                    message: "Please enter the employee's name",
-                },
-                {
-                    type: 'number',
-                    name: 'employeeID',
-                    message: "Please enter the employee's ID number",
-                },
-                {
-                    type: 'input',
-                    name: 'employeeEmail',
-                    message: "Please enter the employee's email address",
-                },
-            ])
-        ]
-    }
+    const employeeQuestionsArr = [
+        {
+            type: 'input',
+            name: 'employeeName',
+            message: "Please enter the employee's name",
+        },
+        {
+            type: 'number',
+            name: 'employeeID',
+            message: "Please enter the employee's ID number",
+        },
+        {
+            type: 'input',
+            name: 'employeeEmail',
+            message: "Please enter the employee's email address",
+        },
+    ]
 
     // Define the questions asked if answers.addMember is equal to 'Add an engineer'
-    function engineerQuestions() {
-        const engineerQuestionsArr = [
-            inquirer.prompt([
-                {
-                    type: 'input',
-                    name: 'engineerGithub',
-                    message: "Please enter the engineer's GitHub username",
-                    when: (answers) => answers['addMember'] === 'Add an engineer',
-                },
-                {
-                    type: 'list',
-                    name: 'addMember',
-                    message: 'What would you like to do next?',
-                    choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
-                },
-            ])
-        ]
-    }
+    const engineerQuestionsArr = [
+        {
+            type: 'input',
+            name: 'engineerGithub',
+            message: "Please enter the engineer's GitHub username",
+            when: (answers) => answers['addMember'] === 'Add an engineer',
+        },
+        {
+            type: 'list',
+            name: 'addMember',
+            message: 'What would you like to do next?',
+            choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
+        },
+    ]
 
     // Define the questions asked if answers.addMember is equal to 'Add an intern'
-    function internQuestions() {
-        const internQuestionsArr = [
-            inquirer.prompt([
-                {
-                    type: 'input',
-                    name: 'internSchool',
-                    message: "Please enter the intern's school",
-                    when: (answers) => answers['addMember'] === 'Add an intern',
-                },
-                {
-                    type: 'list',
-                    name: 'addMember',
-                    message: 'What would you like to do next?',
-                    choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
-                },
-            ])
-        ]
-    }
+    const internQuestionsArr = [
+        {
+            type: 'input',
+            name: 'internSchool',
+            message: "Please enter the intern's school",
+            when: (answers) => answers['addMember'] === 'Add an intern',
+        },
+        {
+            type: 'list',
+            name: 'addMember',
+            message: 'What would you like to do next?',
+            choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
+        },
+    ]
 
     // work out what to do if 'finish team' is selected
     // either an inquirer 'when' or an if statement
@@ -128,30 +114,41 @@ function init() {
     // TODO: Ask Benicio, do I call this from within the class?
     // TODO: How does OUTPIUT_DIR work??
 
-
-    function askQuestions() {
-
-        initialQuestions()
-        
-            .then((answers) => {
-                const renderTeam = render(answers)
-
-                if (answers.addMember === 'Add an engineer') {
-                    employeeQuestions()
-                    engineerQuestions()
-                } else
-                    if (answers.addMember === 'Add an intern') {
-                        employeeQuestions()
-                        internQuestions()
-                    } else {
-                        fs.writeFile('team.html', renderTeam, (err) =>
-                            err ? console.error(err) : console.log('Success!')
-                        );
-                    }
-            })
+    function manager(){
+        inquirer.prompt(managerQuestionsArr)
+        .then((answers) =>
+        const manager = new Manager(
+            answers.maagerName,
+            answers.managerID,
+            answers.managerEmail,
+            answers.managerOffice,
+        )
+        team.push(manager)
+        )
     }
 
-    askQuestions()
+    // function managerQuestions() {
+    //     inquirer.prompt(managerQuestionsArr)
+    //         .then((answers) => {
+
+    //             const renderTeam = render(answers)
+
+    //             if (answers.addMember === 'Add an engineer') {
+    //                 inquirer.prompt(employeeQuestionsArr)
+    //                 inquirer.prompt(engineerQuestionsArr)
+    //             } else
+    //                 if (answers.addMember === 'Add an intern') {
+    //                     inquirer.prompt(employeeQuestionsArr)
+    //                     inquirer.prompt(internQuestionsArr)
+    //                 } else {
+    //                     fs.writeFile('team.html', renderTeam, (err) =>
+    //                         err ? console.error(err) : console.log('Success!')
+    //                     );
+    //                 }
+    //         })
+    // }
+
+    managerQuestions()
 
 }
 
