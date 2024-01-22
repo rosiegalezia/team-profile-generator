@@ -40,12 +40,12 @@ function init() {
             name: 'managerOffice',
             message: "Please enter the team manager's office number",
         },
-        // {
-        //     type: 'list',
-        //     name: 'addMember',
-        //     message: 'What would you like to do next?',
-        //     choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
-        // },
+        {
+            type: 'list',
+            name: 'addMember',
+            message: 'What would you like to do next?',
+            choices: ['Add an engineer', 'Add an intern', 'Finish building the team'],
+        },
     ]
 
     // Define the questions asked if answers.addMember is equal to 'Add an engineer' or 'Add an intern'
@@ -114,17 +114,34 @@ function init() {
     // TODO: Ask Benicio, do I call this from within the class?
     // TODO: How does OUTPIUT_DIR work??
 
-    function manager(){
+    function manager() {
         inquirer.prompt(managerQuestionsArr)
-        .then((answers) =>
-        const manager = new Manager(
-            answers.maagerName,
-            answers.managerID,
-            answers.managerEmail,
-            answers.managerOffice,
-        )
-        team.push(manager)
-        )
+            .then((answers) => {
+                const manager = new Manager(
+                    answers.managerName,
+                    answers.managerID,
+                    answers.managerEmail,
+                    answers.managerOffice,
+                )
+                team.push(manager)
+            })
+    }
+
+    function intern(){
+        inquirer.prompt(employeeQuestionsArr)
+        .then((answers) => {
+            const employee = new Employee(
+                answers.employeeName,
+                answers.employeeID,
+                answers.employeeEmail,
+            )
+            team.push(employee)
+        })
+        
+        inquirer.prompt(internQuestionsArr)
+        .then((answers) => {
+            
+        })
     }
 
     // function managerQuestions() {
